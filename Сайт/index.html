@@ -49,8 +49,8 @@
                     <p class="c-info">
                         Хотите подзаработать и одновременно доставить свою посылку, тогда тебе к нам! Оставьте заявку на нашем сайте и дождитесь звонка.
                     </p>
-                    <a href="https://forms.yandex.ru/u/64a87461c417f33c53869662/" class="form">Заявка</a>
-
+                    <a href="#" class="form-btn">Заявка</a>
+                    <!-- <a href="https://forms.yandex.ru/u/64a87461c417f33c53869662/" class="form">Заявка</a> -->
                 </div>
 
                 <img src="img/фургон.png" alt="loader" class="loader-img">
@@ -153,5 +153,46 @@
             </div>    
         </div>
     </header>
+    <div id="overlay">
+        <div id="popup">
+            <a href="#" id="close">&times;</a>
+            <form>
+                <center><legend>Контактная информация</legend></center>
+                <p><label> Имя: </label></p>
+                <center><p><input type="text" id="firstname" placeholder="Введите своё имя" pattern="[a-zA-Zа-яА-ЯёЁ]{3,}" title="Имя должно содержать только буквы и быть не менее 3 символов в длину" required></p></center>
+                <p><label> Фамилия: </label></p>
+                <center><p><input type="text" id="lastname" placeholder="Введите свою фамилию" pattern="[a-zA-Zа-яА-ЯёЁ]{3,}" title="Фамилия должна содержать только буквы и быть не менее 3 символов в длину" required></p></center>
+                <p><label> Номер телефона: </label></p>
+                <center><p><input type="text" id="tel" placeholder="Введите свой номер телефона" pattern="+[7]{1}[0-9]{10}" title="Телефон должен начинаться на +7 и содержать 11 цифр" required></p></center>
+                <p><label> Почта: </label></p>
+                <center><p><input type="email" id="email" placeholder="Введите свою почту" required></p></center>
+                <center><p><input type="submit" class="form-submit" value="Отправить"></p></center>
+            </form>
+        </div>
+    </div> 
+    <script>    
+        document.addEventListener("DOMContentLoaded", function () {
+        var overlay = document.getElementById("overlay");
+        var popup = document.getElementById("popup");
+        var closeButton = document.getElementById("close");
+        var formBtn = document.querySelector(".form-btn");
+    
+        formBtn.addEventListener("click", function () {
+            overlay.style.display = "block";
+        });
+    
+        closeButton.addEventListener("click", function () {
+            overlay.style.display = "none";
+        });
+    
+        overlay.addEventListener("click", function (e) {
+            if (e.target === overlay) {
+                overlay.style.display = "none";
+            }
+        });
+    });
+    </script>
+
+    
 </body>
- </html>
+</html>
