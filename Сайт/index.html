@@ -1,5 +1,4 @@
- <!DOCTYPE html>
- <html lang="ru">
+<html lang="ru">
  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +28,7 @@
 
                     <li class="second">
                         <a href="#" class="b"><img src="img/info.svg" alt="инфа"><span class="MAIN">Информация</span></a>                    
-                    </li>  
+                    </li>
                     
                     <!-- <li class="third">
                         <a href="mailto:WildHelper@yandex.ru" class="c"><img src="img/mail.svg" alt="почта"><span class="MAIN">WHelper@yandex.ru</span></a>                    
@@ -49,14 +48,15 @@
                     <p class="c-info">
                         Хотите подзаработать и одновременно доставить свою посылку, тогда тебе к нам! Оставьте заявку на нашем сайте и дождитесь звонка.
                     </p>
-                    <a href="#" class="form-btn">Заявка</a>
+                    <button id="generateFormButton" class="form-btn">Заявка</button>
+                    <!-- <a href="#" id="generateFormButton" class="form-btn">Заявка</a> -->
                     <!-- <a href="https://forms.yandex.ru/u/64a87461c417f33c53869662/" class="form">Заявка</a> -->
                 </div>
 
                 <img src="img/фургон.png" alt="loader" class="loader-img">
             </div>
 
-            <a href="#" class="next">
+            <a href="#continue" class="next">
                 <div class="detailed">
                     <p class="detailed-word">ПОДРОБНЕЕ</p>
                     <img src="img/arrow down.svg" alt="downarrow" class="detiled-photo">
@@ -65,7 +65,7 @@
         </div> 
 
         
-        <div class="main-information">
+        <div class="main-information" id="continue">
             <div class="maps">
                 <p>МАРШРУТЫ</p>
                 <ul class="three-cities">
@@ -134,7 +134,7 @@
             </div>
         </div> 
         
-        <a href="#" class="back-to-top"><img src="img/arrow up.svg" alt="back-to-main" class="back-to-main"></a>
+        <a href="#" id="scrollToTopLink" class="back-to-top"><img src="img/arrow up.svg" alt="back-to-main" class="back-to-main"></a>
    
         <div class="end">
             <div class="endpg">
@@ -153,7 +153,12 @@
             </div>    
         </div>
     </header>
-    <div id="overlay">
+
+    <script src="js.js"></script>
+    <div id="overlay"></div>
+    <div id="myForm"></div>
+
+    <!-- <div id="overlay">
         <div id="popup">
             <a href="#" id="close">&times;</a>
             <form>
@@ -191,8 +196,7 @@
             }
         });
     });
-    </script>
-
+    </script> -->
     
 </body>
 </html>
