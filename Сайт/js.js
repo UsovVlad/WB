@@ -1,8 +1,7 @@
-// Функция для создания формы
 function createForm() {
     document.getElementById('overlay').style.display = 'block';
     document.getElementById('myForm').style.display = 'block';
-    document.body.classList.add('no-scroll');
+    // document.body.classList.add('no-scroll');
 
     var form = document.createElement('form');
     form.id = 'actualForm';
@@ -12,7 +11,6 @@ function createForm() {
     title.textContent = 'Контактная информация';
     form.appendChild(title);
 
-    // Имя
     var nameLabel = document.createElement('label');
     nameLabel.textContent = 'Имя:';
     var nameInput = document.createElement('input');
@@ -20,15 +18,14 @@ function createForm() {
     nameInput.name = 'name';
     nameInput.placeholder = 'Введите своё имя';
     nameInput.required = true;
-    nameInput.pattern = "[a-zA-Zа-яА-ЯёЁ]{3,}";
-    nameInput.title = "Имя должно содержать только буквы и быть не менее 3 символов в длину";
+    // nameInput.pattern = "[a-zA-Zа-яА-ЯёЁ]{3,}";
+    // nameInput.title = "Имя должно содержать только буквы и быть не менее 3 символов в длину";
     var nameContainer = document.createElement('div');
     nameContainer.className = 'input-container';
     nameContainer.appendChild(nameLabel);
     nameContainer.appendChild(nameInput);
     form.appendChild(nameContainer);
 
-    // Фамилия
     var lastNameLabel = document.createElement('label');
     lastNameLabel.textContent = 'Фамилия:';
     var lastNameInput = document.createElement('input');
@@ -36,15 +33,14 @@ function createForm() {
     lastNameInput.name = 'lastName';
     lastNameInput.placeholder = 'Введите свою фамилию';
     lastNameInput.required = true;
-    lastNameInput.pattern = "[a-zA-Zа-яА-ЯёЁ]{3,}";
-    lastNameInput.title = "Фамилия должна содержать только буквы и быть не менее 3 символов в длину";
+    // lastNameInput.pattern = "[a-zA-Zа-яА-ЯёЁ]{3,}";
+    // lastNameInput.title = "Фамилия должна содержать только буквы и быть не менее 3 символов в длину";
     var lastNameContainer = document.createElement('div');
     lastNameContainer.className = 'input-container';
     lastNameContainer.appendChild(lastNameLabel);
     lastNameContainer.appendChild(lastNameInput);
     form.appendChild(lastNameContainer);
 
-    // Номер телефона
     var phoneLabel = document.createElement('label');
     phoneLabel.textContent = 'Номер телефона:';
     var phoneInput = document.createElement('input');
@@ -52,15 +48,14 @@ function createForm() {
     phoneInput.name = 'phone';
     phoneInput.placeholder = 'Введите свой номер телефона';
     phoneInput.required = true;
-    phoneInput.pattern="\+[7]{1}[0-9]{10}";
-    phoneInput.title = "Телефон должен начинаться на +7 и содержать 11 цифр";
+    // phoneInput.pattern="\+[7]{1}[0-9]{10}";
+    // phoneInput.title = "Телефон должен начинаться на +7 и содержать 11 цифр";
     var phoneContainer = document.createElement('div');
     phoneContainer.className = 'input-container';
     phoneContainer.appendChild(phoneLabel);
     phoneContainer.appendChild(phoneInput);
     form.appendChild(phoneContainer);
 
-    // Почта
     var emailLabel = document.createElement('label');
     emailLabel.textContent = 'Email:';
     var emailInput = document.createElement('input');
@@ -74,50 +69,126 @@ function createForm() {
     emailContainer.appendChild(emailInput);
     form.appendChild(emailContainer);
 
-    // центрирование кнопки
     var buttonContainer = document.createElement('div');
     buttonContainer.className = 'button-container';
 
-    // Создание кнопки отправки
     var submitButton = document.createElement('button');
     submitButton.type = 'submit';
     submitButton.textContent = 'Отправить';
     buttonContainer.appendChild(submitButton);
     form.appendChild(buttonContainer);
 
-    // Крестик
     var closeSymbol = document.createElement('div');
     closeSymbol.innerHTML = '✖';
     closeSymbol.id = 'closeSymbol';
 
-// Обработчик события для закрытия формы при нажатии на крестик
 closeSymbol.addEventListener('click', function() {
     document.getElementById('overlay').style.display = 'none';
     document.getElementById('myForm').style.display = 'none';
-    document.body.classList.remove('no-scroll');
+    //document.body.classList.remove('no-scroll');
     document.getElementById('myForm').innerHTML = '';
 });
 
-    // Добавление крестика и форму к контейнеру
     document.getElementById('myForm').appendChild(closeSymbol);
     document.getElementById('myForm').appendChild(form);
 
-    // Добавление обработчика события для формы
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', function (event) {
       event.preventDefault();
+  
+      var formData = new FormData(form);
+  
+      // Выполнение AJAX-запроса к PHP-скрипту
+      fetch('processForm.php', {
+          method: 'POST',
+          body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
 
-      var lastNameValue = lastNameInput.value;
-      var nameValue = nameInput.value;
-      var phoneValue = phoneInput.value;
-      var emailValue = emailInput.value;
-
-      console.log('Отправленные данные:');
-      console.log('Фамилия:', lastNameValue);
-      console.log('Имя:', nameValue);
-      console.log('Номер телефона:', phoneValue);
-      console.log('Почта:', emailValue);
+        alert("Форма успешно отправлена!");
+        
+        document.getElementById('overlay').style.display = 'none';
+        document.getElementById('myForm').style.display = 'none';
+        document.getElementById('myForm').innerHTML = '';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("Произошла ошибка при отправке формы. Пожалуйста, попробуйте еще раз.");
     });
-  }
+  });
+
+    // form.addEventListener('submit', function(event) {
+    //   event.preventDefault();
+
+    //   var lastNameValue = lastNameInput.value;
+    //   var nameValue = nameInput.value;
+    //   var phoneValue = phoneInput.value;
+    //   var emailValue = emailInput.value;
+
+    //   console.log('Отправленные данные:');
+    //   console.log('Фамилия:', lastNameValue);
+    //   console.log('Имя:', nameValue);
+    //   console.log('Номер телефона:', phoneValue);
+    //   console.log('Почта:', emailValue);
+    // });
+      document.getElementById('actualForm').addEventListener('input', function (event) {
+        var target = event.target;
+    
+        // Проверяем, является ли целью элемент input
+        if (target.tagName.toLowerCase() === 'input') {
+            validateInput(target);
+        }
+    });
+    
+    function validateInput(inputElement) {
+        var inputValue = inputElement.value;
+    
+        switch (inputElement.name) {
+            case 'name':
+            case 'lastName':
+                validateName(inputValue, inputElement);
+                break;
+            case 'phone':
+                validatePhone(inputValue, inputElement);
+                break;
+            case 'email':
+                validateEmail(inputValue, inputElement);
+                break;
+        }
+    }
+    
+    function validateName(name, inputElement) {
+        var regex = /^[a-zA-Zа-яА-ЯёЁ]{3,}$/;
+        if (!regex.test(name)) {
+            inputElement.setCustomValidity("Поле должно содержать только буквы и быть не менее 3 символов в длину");
+        } else {
+            inputElement.setCustomValidity("");
+        }
+    }
+    
+    function validatePhone(phone, inputElement) {
+        var regex = /^\+[7]{1}[0-9]{10}$/;
+        if (!regex.test(phone)) {
+            inputElement.setCustomValidity("Телефон должен начинаться на +7 и содержать 11 цифр");
+        } else {
+            inputElement.setCustomValidity("");
+        }
+    }
+    
+    function validateEmail(email, inputElement) {
+      var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        if (!regex.test(email)) {
+            inputElement.setCustomValidity("Введите корректный адрес электронной почты");
+        } else {
+            inputElement.setCustomValidity("");
+        }
+    }
+}
+
+
+
+
 
 document.getElementById('generateFormButton').addEventListener('click', createForm);
 
