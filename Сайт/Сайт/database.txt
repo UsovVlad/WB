@@ -1,0 +1,4 @@
+host: localhost
+database: l92279xw_info
+user: l92279xw_info
+password: 123Qwerty123
